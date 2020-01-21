@@ -1,0 +1,176 @@
+{
+	// Place your snippets for python here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"for cycle":{
+		"prefix":"foridx"
+		"body": [
+			"for idx, item in enumerate($1)",
+			"	$2"
+		],
+		"description":"fill the for cycle"
+
+	} 
+
+	"open file":{
+		"prefix":"openfile"
+		"body": [ 
+			"IN = open(InFile)",
+			"   "
+			"lines = (line.rstrip() for line in IN)",
+			"lines = (line.split('#', 1)[0] for line in lines)  # remove comments",
+			"lines = (line.rstrip() for line in lines) # remove lines containing only comments",
+			"lines = (line for line in lines if line)  # Non-blank lines",
+			"   "
+			"lines = list(lines)",
+			"index = 0",
+			"     "
+			"while index < len(lines):",
+			" ",
+			"	line = lines[index]",
+			"	(${1:var1}, ${2:var2}, ${3:var3}) = line.split()",
+			"	",
+			"	$4",
+			"	",
+			"	index+=1",
+		
+		
+			"IN.close()"
+		],
+		"description":"open file line by line "
+	}
+
+	"init main":{
+		"prefix":"initmain"
+		"body": [ 
+
+		"def main(): ",
+		"	if len(sys.argv[1:]) != 1:",
+		"	print ('Missing arguments')",
+		"	print ('Usage: %s [${1:File}] ' % (sys.argv[0]))",
+		"	print ('Example: %s file.txt ' % (sys.argv[0]))",
+		"	sys.exit()",
+		"else:",
+		"	print ('Message: {} '.format(var))",
+		"${2:InFile}= sys.argv[1]",
+		],
+		"description":"setup for main() "
+
+	} 
+
+	"run command":{
+		"prefix":"runcmd"
+		"body": [ 
+			"runcmd = '${1:rm} {$2}'.format(${3:var})"
+			"errrm = sp.run([runcmd], shell=True, stdout=sp.PIPE,"
+			"			   stderr=sp.PIPE, universal_newlines=True)"
+		],
+		"description":"run command for terminal "
+	} 
+
+	"open file w":{
+		"prefix":"openfilew"
+		"body": [ 
+			"${1:fh} = open(${2:file}, 'w')"
+			" "
+			"${3:fh}.close"	
+		],
+		"description":"open file for writing "
+	} 
+
+	"genfromtxt":{
+		"prefix":"genfromtxt"
+		"body": [ 
+			"${1:var1}, ${2:var2}, ${3:var3} = np.genfromtxt(${4:file}, delimiter='', unpack=True)"
+			],
+		"description":"read columns file "
+	} 
+
+	"masks":{
+		"prefix":"masks"
+		"body": [ 
+			"${1:mask} = ${2:var} ${3:==} ${4:0} "
+			"if ${5:mask}.any():"
+			"	${6:var}[${7:mask}] = ${8:0}"
+			],
+		"description":"masks to select data "
+	} 
+
+	"end program":{
+		"prefix":"endprog"
+		"body": [ 
+			"  "
+			"#############################################################################"
+			"######################### End of program  ###################################"
+			"#     ______________________________________________________________________"
+			"#    /___/___/___/___/___/___/___/___/___/___/___/___/___/___/___/___/___/_/|"
+			"#   |___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|__/|"
+			"#   |_|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|/|"
+			"#   |___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|__/|"
+			"#   |_|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|/|"
+			"#   |___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|__/|"
+			"#   |_|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|/"
+			"##############################################################################"
+			"if __name__ == '__main__':"
+			"	main()"
+			],
+			"description":"end of main function "
+	} 
+
+	"init program":{
+		"prefix":"initprog"
+		"body": [ 
+			"#!/usr/bin/env python3\n"
+			"  "
+			"import numpy as np"
+			"import sys"
+			"import os"
+			"import stat"
+			"import subprocess as sp"
+			"import os.path"
+			"from astropy.io import fits"
+			"import scipy"
+			"import scipy.special"
+			"import matplotlib.pyplot as plt"
+		],
+		"description":"initial python setup "
+	} 
+
+	"write to file":{
+		"prefix":"writefile"
+		"body": [ 
+			"line = '  {:.2f}  {:.2f}  {}  '.format(${1:var1}, ${2:var2}, ${3:var3})"
+			"${4:hdl}.write(line)"	
+			],
+		"description":"write to file "
+	} 
+
+	"plot routine":{
+		"prefix":"initplot"
+		"body": [ 
+			"plt.figure(figsize=(8,6))"
+			"plt.plot(${1:xx},${2:yy},'.')"
+			"plt.xlabel('${3:Y}'')"
+			"plt.ylabel('${4:X}')"
+			"plt.savefig('${5:plot.pdf}')"
+		],
+		"description":"initial setup for plotting "
+	} 
+
+
+
+
+
+
+
+}
